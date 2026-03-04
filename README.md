@@ -73,24 +73,31 @@ The lab bridges gap between theory and real offensive security techniques used b
 
 ## Lab Architecture
 
-                      VIRTUALBOX HOST MACHINE
- ---------------------------              -------------------------------        
- | ATTACKER VM             |              |   TARGET VM                 |
- |                         |              |                             |
- | Kali Linux              |              |   Metasploitable 2          |
- | IP: 192.168.56.101      |              |   IP: 192.168.56.102        |
- |                         |              |                             |
- | Tools:                  |              |                             |
- |  - Metasploit           |<-------------|   Intentionally Vulnerable: |
- |  - Netcat               |              |                             |
- |  - Wireshark            |              |    - VSFTPD 2.3.4 backdoor  |
- |  - Nmap                 |              |    - Samba mis-config       |
- ---------------------------              |    - UnrealIRCd backdoor    |
-                                          |    - PHP CGI exploit        |
-                                          -------------------------------
-                                         
-                      Host-Only Network: 192.168.56.0/24
-                      (ISOLATED ENVIRONMENT - No internet access)
+     VIRTUALBOX HOST MACHINE
+
+     ATTACKER VM                      TARGET VM
+
+     Kali Linux
+     IP: 192.168.56.101
+
+     Tools:
+      - Metasploit
+      - Netcat
+      - Wireshark
+      - Nmap
+
+      TARGET VM
+      Metasploitable 2
+      IP: 192.168.56.102
+
+      Intentionally Vulnerable:
+       - VSFTPD 2.3.4 backdoor
+       - Samba mis-config
+       - UnrealIRCd backdoor
+       - PHP CGI exploit
+       
+     Host-Only Network: 192.168.56.0/24
+    (ISOLATED ENVIRONMENT - No internet access)
 
 **Host-Only-Network** --> in this lab we use this network mode because Host-Only adapter creates a completely isolated network between VMs. No traffic will escape to the internet which makes the lab safe and contained.
 
