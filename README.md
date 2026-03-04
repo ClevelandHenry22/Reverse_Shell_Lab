@@ -86,15 +86,15 @@ The lab bridges gap between theory and real offensive security techniques used b
       - Wireshark
       - Nmap
 
-      TARGET VM
-      Metasploitable 2
-      IP: 192.168.56.102
+     TARGET VM
+     Metasploitable 2
+     IP: 192.168.56.102
 
-      Intentionally Vulnerable:
-       - VSFTPD 2.3.4 backdoor
-       - Samba mis-config
-       - UnrealIRCd backdoor
-       - PHP CGI exploit
+     Intentionally Vulnerable:
+      - VSFTPD 2.3.4 backdoor
+      - Samba mis-config
+      - UnrealIRCd backdoor
+      - PHP CGI exploit
        
      Host-Only Network: 192.168.56.0/24
     (ISOLATED ENVIRONMENT - No internet access)
