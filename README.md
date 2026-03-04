@@ -105,16 +105,72 @@ The lab bridges gap between theory and real offensive security techniques used b
 
 ## Tools and Technologies
 
-1. **VirtualBox** --> Hypervisor/ VM platform (infrastructure)
-2. **Kali Linux** --> Attacker operating system (offensive)
-3. **Metasploitable 2** --> Intentionally vulnerable Linux VM (target)
-4. **Netcat (nc)** --> Manual reverse shell establishment (exploitation)
-5. **Metasploit Framework (msfconsole)** --> Exploit framework with Meterpreter (exploitation)
-6. **Wireshark** --> Packet capture and traffic analysis (analysis)
-7. **Nmap** --> Network scanning and service discovery (reconnaissance)
+1. **VirtualBox** --> *Hypervisor/ VM platform (infrastructure)*
+2. **Kali Linux** --> *Attacker operating system (offensive)*
+3. **Metasploitable 2** --> *Intentionally vulnerable Linux VM (target)*
+4. **Netcat (nc)** --> *Manual reverse shell establishment (exploitation)*
+5. **Metasploit Framework (msfconsole)** --> *Exploit framework with Meterpreter (exploitation)*
+6. **Wireshark** --> *Packet capture and traffic analysis (analysis)*
+7. **Nmap** --> *Network scanning and service discovery (reconnaissance)*
 
 ---
 
+## Environment Setup
+
+**Step1: Install VirtualBox**
+
+1. Download VirtualBox from their official website
+2. Install the extension packs as well and verify the installation
+
+**Step2: Set Up Kali Linux VM**
+1. Download Kali linux from their official website
+2. Download the **virtualBox pre-built image** (.ova or .vbox format)
+3. Import into virtualbox:
+   `File --> Import Appliance --> Select the .ova file --> Import`
+4. put these VM settings:
+   ```
+      RAM 2048MB minimum ( >4096 recommended)
+      2 CPU Cores
+      128 MB Video Memory
+      Enable Network Adapter 1  - Host-Only-Adapter
+   ```
+ *On first boot follow all the steps, and put the default credentials kali/kali*
+ *Update the system:* `sudo apt update && sudo apt upgrade -y`
+
+**Step 3: Set Up Metasploitable 2 VM**
+
+- download from `SourceForge:Metasploitable`
+- extract the `.zip` where you'll get a `.vmdk` disk file
+- **Create the VM in VirtualBox:**
+```
+ New --> Name: "Metasploitable2"  --> Type:Linux --> Version: Ubuntu (32-bit)
+ Memory: 1GB
+ --> Use an existing Virtual hard disk --> Select the location of the `.vmdk` file
+```
+- **Network Settings**
+ `Settings --> Network --> Adapter 1 --> Host-Only Adapter`
+
+- **Boot and Verify**
+  `Login: msfadmin / msfadmin`
+
+**Step 4: Configure Host-Only Network**
+
+*In the VirtualBox, set up Host-Only networks so that both VMs are on same isolated subnet:*
+
+```
+ File --> Host Network Manager --> Create
+ IPV4 Address: 192.168.56.1
+ IPV4 Mask:    255.255.255.0
+ DHCP Server:  Enable
+```
+
+*Verify connectivity from Kali*
+
+`ip addr show` - *check your kali IP*
+
+`ping 192.168.56.102` - *ping Metasploitable*
+
+*If the ping responds, the lab is ready*
 
                                          
                                          
