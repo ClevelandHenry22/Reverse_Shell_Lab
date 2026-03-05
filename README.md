@@ -179,7 +179,7 @@ The lab bridges gap between theory and real offensive security techniques used b
 
 *In a **bind shell**, the attacker connects **to** the target (easy to block with firewalls)*.
 
-*In a **reverse shell**, the target connects **back** to the attacker (bypasses most inbound firewall rules)
+*In a **reverse shell**, the target connects **back** to the attacker (bypasses most inbound firewall rules)*
 
 *This is why reverse shells are widely used in real attacks.*
 
@@ -410,7 +410,7 @@ VSFTPd 2.3.4 was backdoored in 2011 — over a decade ago. Metasploitable 2 stil
    
 Wireshark made it possible to read every command in the shell session. Modern attackers use encrypted reverse shells (e.g., openssl s_client) to evade this. This highlighted why encryption matters even in internal networks.
 
-4. **Netcat **
+4. **Netcat**
    
 Understanding Netcat's raw capabilities before jumping to Metasploit gave me a much deeper understanding for how shells work. Metasploit abstracts the complexity, but knowing what's happening at the TCP level is invaluable for both offense and defense.
 
