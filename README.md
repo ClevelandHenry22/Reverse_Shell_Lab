@@ -258,9 +258,9 @@ uname -a -----> linux metasploitable 2.6.24-16-server
 
 ## Attack Phase 2 - Metasploit Exploitation
 
-***Exploiting VSFTPD 2.3.4 Backdoor (CVE-2011-2523)**
+***Exploiting VSFTPD 2.3.4 Backdoor (CVE-2011-2523)***
 
-**VSFTPd 2.3.4 contains a deliberate backdoor --  when a username containing `:)` is sent, the daemon opens a shell on port 6200. It a real CVE.
+**VSFTPd 2.3.4 contains a deliberate backdoor** --  when a username containing `:)` is sent, the daemon opens a shell on port 6200. It a real CVE.
 
 - **Launnch Metasploit**: `msfconsole`
 
