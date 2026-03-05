@@ -167,7 +167,7 @@ The lab bridges gap between theory and real offensive security techniques used b
 
 `ip addr show` - *check your kali IP*
 
-`ping 192.168.56.102` - *ping Metasploitable*
+`ping 192.168.56.5` - *ping Metasploitable*
 
 *If the ping responds, the lab is ready*
 
@@ -190,7 +190,7 @@ On **Kali VM**, scan the target to discover the open ports and services:
 
 **Flag**       **Meaning**
 
-**-sV** --> *Service version detection
+**-sV** --> *Service version detection*
 
 **-sC** --> *Run default NSE scripts*
 
