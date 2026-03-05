@@ -382,17 +382,13 @@ Red flag: bash spawned from network service
 
 ## **Key Findings**
 
-**Finding**                                        **Severity**          **CVE**
-
-VSFTPd 2.3.4 backdoor allows instant root shell      Critical              CVE-2011-2523
-
-Netcat available on target enables manual shell       High                  N/A
-
-Telnet service exposed (plaintext credentials)        High                  N/A
-
-No firewall / egress filtering on target              High                  N/A
-
-All reverse shell traffic transmitted unencrypted     Medium                N/A
+| Finding                                              | Severity | CVE           |
+|------------------------------------------------------|----------|---------------|
+| VSFTPd 2.3.4 backdoor allows instant root shell      | Critical | CVE-2011-2523 |
+| Netcat available on target enables manual shell      | High     | N/A           |
+| Telnet service exposed (plaintext credentials)       | High     | N/A           |
+| No firewall / egress filtering on target             | High     | N/A           |
+| All reverse shell traffic transmitted unencrypted    | Medium   | N/A           |
 
 ---
 
