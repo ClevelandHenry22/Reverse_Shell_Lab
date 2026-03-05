@@ -22,24 +22,24 @@ This project is for **educational purposes only**.
 
 ### Table of Contents
 
-1. [Project Overview](#ProjectOverview)
+1. [Project Overview](#Project-Overview)
 2. [Objectives](#Objectives)
-3. [Lab Architecture](#LabArchitecture)
-4. [Tools and Technologies](#ToolsandTechnologies)
-5. [Environment Setup](#EnvironmentSetup)
+3. [Lab Architecture](#Lab-Architecture)
+4. [Tools and Technologies](#Tools-and-Technologies)
+5. [Environment Setup](#Environment-Setup)
 
      - *VirtualBox Installation*
      - *Kali Linux VM Setup*
      - *Metasploitable 2 VM setup*
      - *Network Configuration*
   
-6. [Attack Phase 1 - Manual Reverse Shell with Netcat](#AttackPhase1)
-7. [Attack Phase 2 - Metasploit Exploitation](#AttackPhase1)
-8. [Traffic Analysis with Wireshark](#TrafficAnalysiswithWireshark)
-9. [Detection and Blue Team perspectives](#DetectionandBlueTeamPerspectives)
-10. [Key Findings](#KeyFindings)
-11. [Lessons Learned](#LessonsLearned)
-12. [Further Research and Next Steps](#FurtherResearchandNextSteps)
+6. [Attack Phase 1 - Manual Reverse Shell with Netcat](#Attack-Phase-1)
+7. [Attack Phase 2 - Metasploit Exploitation](#Attack-Phase-2)
+8. [Traffic Analysis with Wireshark](#Traffic-Analysis-with-Wireshark)
+9. [Detection and Blue Team perspectives](#Detection-and-Blue-Team-Perspectives)
+10. [Key Findings](#Key-Findings)
+11. [Lessons Learned](#Lessons-Learned)
+12. [Further Research and Next Steps](#Further-Research-and-Next-Steps)
 
 ---
 ## Project Overview
