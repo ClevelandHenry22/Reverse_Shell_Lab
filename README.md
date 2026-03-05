@@ -22,24 +22,24 @@ This project is for **educational purposes only**.
 
 ### Table of Contents
 
-1. **Project Overview**
-2. **Objectives**
-3. **Lab Structure**
-4. **Tools and Technologies**
-5. **Environment Setup**
+1. [Project Overview](#ProjectOverview)
+2. [Objectives](#Objectives)
+3. [Lab Architecture](#LabArchitecture)
+4. [Tools and Technologies](#ToolsandTechnologies)
+5. [Environment Setup](#EnvironmentSetup)
 
      - *VirtualBox Installation*
      - *Kali Linux VM Setup*
      - *Metasploitable 2 VM setup*
      - *Network Configuration*
   
-6. **Attack Phase 1 - Manual Reverse Shell with Netcat**
-7. **Attack Phase 2 - Metasploit Exploitation**
-8. **Traffic Analysis with Wireshark**
-9. **Detection and Blue Team perspectives**
-10. **Key Findings**
-11. **Lessons Learned**
-12. **Further Research and Next Steps**
+6. [Attack Phase 1 - Manual Reverse Shell with Netcat](#AttackPhase1)
+7. [Attack Phase 2 - Metasploit Exploitation](#AttackPhase1)
+8. [Traffic Analysis with Wireshark](#TrafficAnalysiswithWireshark)
+9. [Detection and Blue Team perspectives](#DetectionandBlueTeamPerspectives)
+10. [Key Findings](#KeyFindings)
+11. [Lessons Learned](#LessonsLearned)
+12. [Further Research and Next Steps](#FurtherResearchandNextSteps)
 
 ---
 ## Project Overview
