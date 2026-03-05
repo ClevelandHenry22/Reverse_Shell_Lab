@@ -33,8 +33,8 @@ This project is for **educational purposes only**.
      - *Metasploitable 2 VM setup*
      - *Network Configuration*
   
-6. [Attack Phase 1 - Manual Reverse Shell with Netcat](#Attack-Phase-1)
-7. [Attack Phase 2 - Metasploit Exploitation](#Attack-Phase-2)
+6. [Attack Phase 1 - Manual Reverse Shell with Netcat](#Attack-Phase-1---Manual-Reverse-Shell-with-Netcat)
+7. [Attack Phase 2 - Metasploit Exploitation](#Attack-Phase-2---Metasploit-Exploitation)
 8. [Traffic Analysis with Wireshark](#Traffic-Analysis-with-Wireshark)
 9. [Detection and Blue Team perspectives](#Detection-and-Blue-Team-Perspectives)
 10. [Key Findings](#Key-Findings)
@@ -309,7 +309,7 @@ meterpreter > shell             # Drop into a system shell
 ---
 ## Traffic Analysis with Wireshark
 
-**Capturing the Attack Traffic
+**Capturing the Attack Traffic**
 
 Before starting any of the attacks, start wireshark  `sudo wireshark &`
 
