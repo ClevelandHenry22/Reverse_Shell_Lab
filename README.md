@@ -20,6 +20,20 @@ This project is for **educational purposes only**.
 
 ---
 
+## Repo Structure
+```
+reverse-shell-lab/
+├── README.md              
+├── LICENSE                
+├── .gitignore             
+├── pentest_report.docx    
+├── docs/
+│   ├── wireshark-analysis.md
+│   └── github-setup.md
+└── screenshots/
+```
+---
+
 ### Table of Contents
 
 1. [Project Overview](#Project-Overview)
@@ -42,6 +56,7 @@ This project is for **educational purposes only**.
 12. [Further Research and Next Steps](#Further-Research-and-Next-Steps)
 
 ---
+
 ## Project Overview
 
 This project is a home lab that simulates how attackers establish unauthorized remote access to target systems using **reverse shells**. A reverse shell is a technique where **the target machine initiates a connection back to the attacker,** bypassing inbound firewall rules which is one of the most common dangerous techniques used by attackers.
