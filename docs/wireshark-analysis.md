@@ -3,10 +3,11 @@
 ## Setup
 
 Start Wireshark on Kali before running any attacks:
-```bash
-sudo wireshark &
+
+`sudo wireshark `
+
 # Select interface: eth1 (host-only adapter) → Start capture
-` ` `
+
 
 ---
 
@@ -30,12 +31,14 @@ Apply filter → right-click any **PSH, ACK** packet → **Follow → TCP Stream
 **What you'll see (two colors):**
 - Red = commands typed on Kali (attacker)
 - Blue = responses from Metasploitable (target)
+
 ```
 bash: no job control in this shell
 msfadmin@metasploitable:~$ whoami
 whoami
 msfadmin
-` ` `
+
+```
 
 **Key findings:**
 - Target initiated the connection (reverse shell signature)
