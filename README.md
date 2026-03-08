@@ -26,7 +26,7 @@ reverse-shell-lab/
 ├── README.md              
 ├── LICENSE                
 ├── .gitignore             
-├── pentest_report.docx    
+├── Reverse-Shell-Pentest-Report.docx    
 ├── docs/
 │   ├── wireshark-analysis.md
 │   └── github-setup.md
@@ -428,9 +428,9 @@ You'll then see the raw shell session:
 
    Filter: `tcp.port == 21 or tcp.port == 6200`
 
-![wireshark-backdoor]()
+![wireshark-backdoor](new1.png)
 
-![wireshark-port]()
+![wireshark-port](new2.png)
 
 ---
 
