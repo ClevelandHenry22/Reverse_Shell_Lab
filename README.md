@@ -425,13 +425,38 @@ You'll then see the raw shell session:
 ![another-filter](/screenshots/wsharkfinal.png)
 
 5. **VSFTPd Backdoor Traffic**
+   
+   (**Wireshark Evidence — CVE-2011-2523 (VSFTPd 2.3.4 Backdoor)**)
+
+*To analyze the exploit traffic, I applied the following filter in Wireshark:
 
    Filter: `tcp.port == 21 or tcp.port == 6200`
 
-![wireshark-backdoor](new1.png)
+![wireshark-backdoor](/screenshots/new1.png)
 
-![wireshark-port](new2.png)
+**What the capture revealed on port 21:**
 
+Following the TCP stream on port 21 showed exactly how the backdoor was triggered. Metasploit sent a username containing `:)` — specifically `0A:)` — during the FTP authentication
+
+```
+220 (vsFTPd 2.3.4)
+USER 0A:)                  ← the :) triggers the backdoor
+PASS HSjnV                 ← password is irrelevant
+421 Timeout.               ← looks like failure but the damage is already done
+```
+
+The `:)` string in the username is the exact trigger built into VSFTPd 2.3.4's backdoor code. 
+
+The moment that username was received by the server, it silently spawned a root shell on port 6200 — regardless of what password was sent or whether the FTP login even succeeded.
+
+
+
+![wireshark-port](/screenshots/new2.png)
+
+**What the capture revealed on port 6200:**
+
+Filtering for `tcp.port == 6200` and following that TCP stream confirmed the backdoor shell was open and running as root — `uid=0(root)` — proving full system compromise via a single FTP authentication attempt.
+The key takeaway: This is why version detection during reconnaissance matters so much. The Nmap scan immediately revealed `vsFTPd 2.3.4` — a version that has been publicly known to be backdoored since 2011. One banner, one searchsploit lookup, root access in seconds. Unpatched software is one of the most common and dangerous entry points in real-world attacks.
 ---
 
 ## Detection and Blue Team Perspective
