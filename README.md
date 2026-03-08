@@ -417,10 +417,15 @@ You'll then see the raw shell session:
 3. **Traffic Analysis Filters Used**
 
    `tcp.port == 4444` --> Shows reverse shell traffic
+   
    `tcp.flags.syn == 1` --> Shows all connection initiations
+   
    `ip.src == 192.168.56.5` --> Traffic from target only
+   
    `tcp.stream eq 0`  --> Follow specific TCP stream
+   
    `frame contains "bash"` --> Find the packets with shell strings
+   
 
 ![another-filter](/screenshots/wsharkfinal.png)
 
@@ -428,7 +433,7 @@ You'll then see the raw shell session:
    
    (**Wireshark Evidence — CVE-2011-2523 (VSFTPd 2.3.4 Backdoor)**)
 
-*To analyze the exploit traffic, I applied the following filter in Wireshark:
+*To analyze the exploit traffic, I applied the following filter in Wireshark:*
 
    Filter: `tcp.port == 21 or tcp.port == 6200`
 
@@ -457,6 +462,7 @@ The moment that username was received by the server, it silently spawned a root 
 
 Filtering for `tcp.port == 6200` and following that TCP stream confirmed the backdoor shell was open and running as root — `uid=0(root)` — proving full system compromise via a single FTP authentication attempt.
 The key takeaway: This is why version detection during reconnaissance matters so much. The Nmap scan immediately revealed `vsFTPd 2.3.4` — a version that has been publicly known to be backdoored since 2011. One banner, one searchsploit lookup, root access in seconds. Unpatched software is one of the most common and dangerous entry points in real-world attacks.
+
 ---
 
 ## Detection and Blue Team Perspective
