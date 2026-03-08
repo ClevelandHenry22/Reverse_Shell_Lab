@@ -428,6 +428,10 @@ You'll then see the raw shell session:
 
    Filter: `tcp.port == 21 or tcp.port == 6200`
 
+![wireshark-backdoor]()
+
+![wireshark-port]()
+
 ---
 
 ## Detection and Blue Team Perspective
